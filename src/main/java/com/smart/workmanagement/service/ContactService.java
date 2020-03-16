@@ -1,4 +1,12 @@
-package com.smart.workmanagement.security;
+package com.smart.workmanagement.service;
 
-public class ContactService {
+import com.smart.workmanagement.model.Contact;
+
+import java.util.List;
+
+public interface ContactService {
+
+    List<Contact> getAllContact();
+
+    Contact findById(Long id);
 }

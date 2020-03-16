@@ -1,4 +1,7 @@
 package com.smart.workmanagement.repo;
 
-public class BuildingRepo {
+import com.smart.workmanagement.model.Building;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BuildingRepo extends JpaRepository<Building, Long> {
 }

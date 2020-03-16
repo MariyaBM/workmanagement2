@@ -12,5 +12,5 @@ public interface CustomerService {
 
     void delete(Long id);
 
-    List<Customer> getAll();
+    List<Customer> getAllCustomer();
 }

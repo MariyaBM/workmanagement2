@@ -26,7 +26,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<Order>> getAll() {
-        List<Order> orders = this.orderService.getAll();
+        List<Order> orders = this.orderService.getAllOrder();
 
         if (orders.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

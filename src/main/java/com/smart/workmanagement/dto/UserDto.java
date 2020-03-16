@@ -39,7 +39,7 @@ public class UserDto {
         return userDto;
     }
 
-    public static List<UserDto> userDtoList(List<User> users){
+    public static List<UserDto> userDtoList(List<User> users) {
         List<UserDto> userList = new ArrayList<>();
         users.forEach(user -> userList.add(fromUser(user)));
         return userList;

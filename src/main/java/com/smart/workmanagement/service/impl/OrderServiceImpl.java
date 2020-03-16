@@ -32,9 +32,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<Order> getAllOrder() {
         List<Order> orders = orderRepo.findAll();
-        log.info("IN getAll - {} orders found", orders.size());
+        log.info("IN getAllOrder - {} orders found", orders.size());
         return orders;
     }
 
@@ -51,12 +51,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order create(Order order, @AuthenticationPrincipal User user, Customer customer) {
+    public Order create(Order order) {
         order.setCreationDate(LocalDateTime.now());
 
-        order.setAuthor(user);
-
-        order.setCustomer(customer);
+//        order.setAuthor(user);
+//
+//        order.setCustomer(customer);
 
         Order createdOrder = orderRepo.save(order);
         log.info("IN create - order: {} successfully registered", createdOrder);

@@ -16,10 +16,6 @@ public class Address {
     private Long id;
     private String name;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "building_id")
-//    private Building building;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "addresses_buildings",
             joinColumns = @JoinColumn(name = "address_id"),

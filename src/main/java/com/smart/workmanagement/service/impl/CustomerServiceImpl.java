@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getAll() {
+    public List<Customer> getAllCustomer() {
         List<Customer> customers = customerRepo.findAll();
         log.info("IN getAll - {} orders found", customers.size());
         return customers;
