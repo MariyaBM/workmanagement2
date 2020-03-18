@@ -2,7 +2,6 @@ package com.smart.workmanagement.service.impl;
 
 import com.smart.workmanagement.model.Order;
 import com.smart.workmanagement.repo.OrderRepo;
-import com.smart.workmanagement.repo.UserRepo;
 import com.smart.workmanagement.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrder() {
+    public List<Order> getAllOrders() {
         List<Order> orders = orderRepo.findAll();
         log.info("IN getAllOrder - {} orders found", orders.size());
         return orders;

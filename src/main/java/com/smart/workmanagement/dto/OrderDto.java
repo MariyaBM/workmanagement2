@@ -2,12 +2,8 @@ package com.smart.workmanagement.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.smart.workmanagement.model.Order;
-import com.smart.workmanagement.model.Status;
-import com.smart.workmanagement.model.User;
-import com.smart.workmanagement.model.WorkGroup;
+import com.smart.workmanagement.model.*;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,9 +28,8 @@ public class OrderDto {
     private Date startDate;
 
     private WorkGroup workGroup;
-    private String customer;
-    private String contact;
-    private String address;
+
+    private CustomerDto customer;
     private String workDescription;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -47,6 +42,7 @@ public class OrderDto {
     public Order toOrder() {
         Order order = new Order();
         User user = new User();
+        Customer customer = new Customer();
         order.setId(id);
         order.setExtId(extId);
         order.setCreatedDate(createdDate);
@@ -55,9 +51,7 @@ public class OrderDto {
         order.setAuthor(UserDto.fromUser(user).toUser());
         order.setStartDate(startDate);
         order.setWorkGroup(workGroup);
-        order.setCustomer(customer);
-        order.setContact(contact);
-        order.setAddress(address);
+        order.setCustomer(CustomerDto.fromCustomer(customer).toCustomer());
         order.setWorkDescription(workDescription);
         order.setEndDate(endDate);
         order.setVerificationDate(verificationDate);
@@ -76,9 +70,7 @@ public class OrderDto {
         orderDto.setAuthor(UserDto.fromUser(order.getAuthor()));
         orderDto.setStartDate(order.getStartDate());
         orderDto.setWorkGroup(order.getWorkGroup());
-        orderDto.setCustomer(order.getCustomer());
-        orderDto.setContact(order.getContact());
-        orderDto.setAddress(order.getAddress());
+        orderDto.setCustomer(CustomerDto.fromCustomer(order.getCustomer()));
         orderDto.setWorkDescription(order.getWorkDescription());
         orderDto.setEndDate(order.getEndDate());
         orderDto.setVerificationDate(order.getVerificationDate());

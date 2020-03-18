@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/users/")
+@RequestMapping(value = "/api/v1/user/")
 public class UserController {
 
     private final UserService userService;
@@ -24,9 +24,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "list")
-    public ResponseEntity<List<UserDto>> getAll() {
-        List<User> users = userService.getAll();
+    @GetMapping
+    public ResponseEntity<List<UserDto>> listUsers() {
+        List<User> users = userService.getAllUsers();
 
         if (users == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

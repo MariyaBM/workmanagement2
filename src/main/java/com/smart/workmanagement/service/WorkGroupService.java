@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface WorkGroupService {
 
-    List<WorkGroup> getAll();
+    List<WorkGroup> getAllGroups();
 
     WorkGroup findById(Long id);
 }

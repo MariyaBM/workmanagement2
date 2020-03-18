@@ -26,8 +26,8 @@ public class WorkGroupController {
     }
 
     @GetMapping
-    public ResponseEntity<List<WorkGroupDto>> getAll() {
-        List<WorkGroup> groups = workGroupService.getAll();
+    public ResponseEntity<List<WorkGroupDto>> listGroups() {
+        List<WorkGroup> groups = workGroupService.getAllGroups();
 
         if (groups.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

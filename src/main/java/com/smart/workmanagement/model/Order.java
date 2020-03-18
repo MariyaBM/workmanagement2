@@ -2,7 +2,6 @@ package com.smart.workmanagement.model;
 
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +9,6 @@ import java.util.Date;
 @Entity
 @Table(name = "orders")
 @Data
-@ToString
 public class Order extends BaseEntity {
 
     private String extId;
@@ -25,9 +23,10 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "work_group_id")
     private WorkGroup workGroup;
 
-    private String customer;
-    private String contact;
-    private String address;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     private String workDescription;
     private Date endDate;
     private Date verificationDate;

@@ -8,7 +8,7 @@ public interface UserService {
 
     User register(User user);
 
-    List<User> getAll();
+    List<User> getAllUsers();
 
     User findByUsername(String username);
 

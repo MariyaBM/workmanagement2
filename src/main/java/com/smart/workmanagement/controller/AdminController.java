@@ -2,7 +2,6 @@ package com.smart.workmanagement.controller;
 
 
 import com.smart.workmanagement.dto.AdminDto;
-import com.smart.workmanagement.dto.UserDto;
 import com.smart.workmanagement.model.User;
 import com.smart.workmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,8 @@ public class AdminController {
     }
 
     @GetMapping(value = "users/")
-    public ResponseEntity<List<AdminDto>> getAll() {
-        List<User> users = userService.getAll();
+    public ResponseEntity<List<AdminDto>> listUsers() {
+        List<User> users = userService.getAllUsers();
 
         if (users == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

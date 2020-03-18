@@ -1,7 +1,6 @@
 package com.smart.workmanagement.service.impl;
 
 
-import com.smart.workmanagement.model.Order;
 import com.smart.workmanagement.model.WorkGroup;
 import com.smart.workmanagement.repo.WorkGroupRepo;
 import com.smart.workmanagement.service.WorkGroupService;
@@ -23,7 +22,7 @@ public class WorkGroupServiceImpl implements WorkGroupService {
     }
 
     @Override
-    public List<WorkGroup> getAll() {
+    public List<WorkGroup> getAllGroups() {
         List<WorkGroup> groups = workGroupRepo.findAll();
         log.info("IN getAll - {} groups found", groups.size());
         return groups;
