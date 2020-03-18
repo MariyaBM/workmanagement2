@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/admin/")
 public class AdminController {
@@ -35,6 +37,17 @@ public class AdminController {
         AdminDto result = AdminDto.fromUser(user);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "users/")
+    public ResponseEntity<List<AdminDto>> getAll() {
+        List<User> users = userService.getAll();
+
+        if (users == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(AdminDto.userDtoList(users), HttpStatus.OK);
     }
 
 }

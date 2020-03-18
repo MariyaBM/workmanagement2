@@ -6,6 +6,9 @@ import com.smart.workmanagement.model.Status;
 import com.smart.workmanagement.model.User;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AdminDto {
@@ -40,4 +43,11 @@ public class AdminDto {
 
         return adminDto;
     }
+
+    public static List<AdminDto> userDtoList(List<User> users) {
+        List<AdminDto> userList = new ArrayList<>();
+        users.forEach(user -> userList.add(fromUser(user)));
+        return userList;
+    }
+
 }
