@@ -1,8 +1,6 @@
 package com.smart.workmanagement.service;
 
-import com.smart.workmanagement.model.Customer;
 import com.smart.workmanagement.model.Order;
-import com.smart.workmanagement.model.User;
 
 import java.util.List;
 

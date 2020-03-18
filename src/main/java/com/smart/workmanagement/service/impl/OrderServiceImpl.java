@@ -1,15 +1,11 @@
 package com.smart.workmanagement.service.impl;
 
-import com.smart.workmanagement.model.Customer;
 import com.smart.workmanagement.model.Order;
-import com.smart.workmanagement.model.User;
-import com.smart.workmanagement.repo.CustomerRepo;
 import com.smart.workmanagement.repo.OrderRepo;
 import com.smart.workmanagement.repo.UserRepo;
 import com.smart.workmanagement.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,15 +16,11 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
-    private final CustomerRepo customerRepo;
-    private final UserRepo userRepo;
 
 
     @Autowired
-    public OrderServiceImpl(OrderRepo orderRepo, CustomerRepo customerRepo, UserRepo userRepo) {
+    public OrderServiceImpl(OrderRepo orderRepo) {
         this.orderRepo = orderRepo;
-        this.customerRepo = customerRepo;
-        this.userRepo = userRepo;
     }
 
     @Override
@@ -52,11 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order create(Order order) {
-        order.setCreationDate(LocalDateTime.now());
-
-//        order.setAuthor(user);
-//
-//        order.setCustomer(customer);
+        order.setCreatedDate(LocalDateTime.now());
 
         Order createdOrder = orderRepo.save(order);
         log.info("IN create - order: {} successfully registered", createdOrder);

@@ -102,10 +102,10 @@
 
     <changeSet id="6" author="maverick">
         <insert tableName="roles">
-            <column name="roles" value="USER"/>
+            <column name="roles" value="ROLE_USER"/>
         </insert>
         <insert tableName="roles">
-            <column name="roles" value="ADMIN"/>
+            <column name="roles" value="ROLE_ADMIN"/>
         </insert>
     </changeSet>
 
@@ -115,7 +115,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="list" type="VARCHAR(200)">
+            <column name="group_list" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

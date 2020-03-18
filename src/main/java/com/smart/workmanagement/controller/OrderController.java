@@ -1,7 +1,7 @@
 package com.smart.workmanagement.controller;
 
 
-import com.smart.workmanagement.model.Customer;
+import com.smart.workmanagement.dto.OrderDto;
 import com.smart.workmanagement.model.Order;
 import com.smart.workmanagement.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,13 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAll() {
-        List<Order> orders = this.orderService.getAllOrder();
+    public ResponseEntity<List<OrderDto>> getAll() {
+        List<Order> orders = orderService.getAllOrder();
 
         if (orders.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+        return new ResponseEntity<>(OrderDto.orderDtoList(orders), HttpStatus.OK);
     }
 }
