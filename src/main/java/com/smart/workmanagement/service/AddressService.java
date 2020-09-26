@@ -8,5 +8,9 @@ public interface AddressService {
 
     List<Address> getAllAddress();
 
-    Address findById(Long id);
+    Address getById(Long id);
+
+    void create(Address address);
+
+    void delete(Long id);
 }

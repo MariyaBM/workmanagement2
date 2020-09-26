@@ -1,4 +1,7 @@
 package com.smart.workmanagement.repo;
 
-public interface WorkRepo {
+import com.smart.workmanagement.model.Work;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WorkRepo extends JpaRepository<Work, Long> {
 }

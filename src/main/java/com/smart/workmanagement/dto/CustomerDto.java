@@ -1,7 +1,6 @@
 package com.smart.workmanagement.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.smart.workmanagement.model.Address;
 import com.smart.workmanagement.model.Contact;
 import com.smart.workmanagement.model.Customer;
 import lombok.Data;
@@ -19,16 +18,13 @@ public class CustomerDto {
 
     private List<ContactDto> contacts;
 
-    private List<AddressDto> addresses;
-
     public Customer toCustomer() {
         Customer customer = new Customer();
-        List<Contact> contacts = new ArrayList<>();
-        List<Address> addresses = new ArrayList<>();
         customer.setId(id);
         customer.setName(name);
+
+        List<Contact> contacts = new ArrayList<>();
         customer.setContacts(contacts);
-        customer.setAddresses(addresses);
 
         return customer;
     }
@@ -38,7 +34,6 @@ public class CustomerDto {
         customerDto.setId(customer.getId());
         customerDto.setName(customer.getName());
         customerDto.setContacts(ContactDto.contactDtoList(customer.getContacts()));
-        customerDto.setAddresses(AddressDto.addressDtoList(customer.getAddresses()));
 
         return customerDto;
     }

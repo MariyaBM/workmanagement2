@@ -1,4 +1,5 @@
 package com.smart.workmanagement.dto;
 
-public class EventType {
+public enum EventType {
+    CREATE, UPDATE, REMOVE
 }

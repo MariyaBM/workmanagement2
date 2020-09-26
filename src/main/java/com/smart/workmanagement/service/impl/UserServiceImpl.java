@@ -77,4 +77,11 @@ public class UserServiceImpl implements UserService {
         userRepo.deleteById(id);
         log.info("IN delete - user with id: {} successfully deleted", id);
     }
+
+    @Override
+    public void logout() {
+
+//        SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+        log.info("IN logout - user: {} logout is successfully");
+    }
 }

@@ -30,6 +30,8 @@ public class AuthenticationController {
 
     private final UserService userService;
 
+
+
     @Autowired
     public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
@@ -38,7 +40,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto) {
 
         try {
             String username = requestDto.getUsername();
@@ -52,12 +54,19 @@ public class AuthenticationController {
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
             Map<Object, Object> response = new HashMap<>();
+
             response.put("username", username);
+            response.put("lastName", user.getLastName());
+            response.put("firstName", user.getFirstName());
+            response.put("email", user.getEmail());
             response.put("token", token);
 
             return ResponseEntity.ok(response);
+
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
+
+
 }

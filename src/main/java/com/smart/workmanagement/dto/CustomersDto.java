@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CustomerDto {
+public class CustomersDto {
 
     private Long id;
 
@@ -33,8 +33,8 @@ public class CustomerDto {
         return customer;
     }
 
-    public static CustomerDto fromCustomer(Customer customer) {
-        CustomerDto customerDto = new CustomerDto();
+    public static CustomersDto fromCustomer(Customer customer) {
+        CustomersDto customerDto = new CustomersDto();
         customerDto.setId(customer.getId());
         customerDto.setName(customer.getName());
         customerDto.setContacts(ContactDto.contactDtoList(customer.getContacts()));
@@ -43,8 +43,8 @@ public class CustomerDto {
         return customerDto;
     }
 
-    public static List<CustomerDto> customerDtoList(List<Customer> customers) {
-        List<CustomerDto> customerDtoList = new ArrayList<>();
+    public static List<CustomersDto> customerDtoList(List<Customer> customers) {
+        List<CustomersDto> customerDtoList = new ArrayList<>();
         customers.forEach(customer -> customerDtoList.add(fromCustomer(customer)));
         return customerDtoList;
     }

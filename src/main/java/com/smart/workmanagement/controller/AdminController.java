@@ -26,7 +26,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "users/{id}")
-    public ResponseEntity<AdminDto> getUserById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<AdminDto> getUser(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
 
         if (user == null) {

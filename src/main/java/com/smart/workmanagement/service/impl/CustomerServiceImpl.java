@@ -1,6 +1,7 @@
 package com.smart.workmanagement.service.impl;
 
 import com.smart.workmanagement.model.Customer;
+import com.smart.workmanagement.model.Status;
 import com.smart.workmanagement.repo.AddressRepo;
 import com.smart.workmanagement.repo.CustomerRepo;
 import com.smart.workmanagement.service.CustomerService;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,17 +27,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getById(Long id) {
-        return null;
+        Customer customer = customerRepo.findById(id).orElse(null);
+        if (customer == null) {
+            log.warn("IN findById - no customer found by id: {}", id);
+            return null;
+        }
+        log.info("IN findById - customer found by id: {}", customer);
+        return customer;
     }
 
     @Override
-    public void save(Customer customer) {
-
+    public void create(Customer customer) {
+        customer.setCreatedDate(LocalDateTime.now());
+        customer.setStatus(Status.ACTIVE);
+        Customer createdCustomer = customerRepo.save(customer);
+        log.info("IN create - customer: {} successfully registered", createdCustomer);
     }
 
     @Override
     public void delete(Long id) {
-
+        customerRepo.deleteById(id);
+        log.info("IN delete - customer with id: {} successfully deleted", id);
     }
 
     @Override

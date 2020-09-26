@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/work-group/")
+@RequestMapping(value = "/api/v1/group/")
 public class WorkGroupController {
 
     private final WorkGroupService workGroupService;
@@ -37,7 +37,7 @@ public class WorkGroupController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<WorkGroupDto> getGroupById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<WorkGroupDto> getGroup(@PathVariable(name = "id") Long id) {
         WorkGroup workGroup = workGroupService.findById(id);
 
         if (workGroup == null) {

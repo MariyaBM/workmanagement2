@@ -2,6 +2,7 @@ package com.smart.workmanagement.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.smart.workmanagement.model.Role;
 import com.smart.workmanagement.model.Status;
 import com.smart.workmanagement.model.User;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class AdminDto {
     private String lastName;
     private String email;
     private String status;
+    private List<Role> roles;
 
     public User toUser() {
         User user = new User();

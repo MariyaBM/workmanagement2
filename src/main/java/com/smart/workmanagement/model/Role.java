@@ -2,8 +2,8 @@ package com.smart.workmanagement.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -12,7 +12,7 @@ public class Role extends BaseEntity {
 
     private String roles;
 
-//    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-//    private List<User> users;
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
 }

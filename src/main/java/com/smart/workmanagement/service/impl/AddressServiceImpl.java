@@ -1,12 +1,14 @@
 package com.smart.workmanagement.service.impl;
 
 import com.smart.workmanagement.model.Address;
+import com.smart.workmanagement.model.Status;
 import com.smart.workmanagement.repo.AddressRepo;
 import com.smart.workmanagement.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,7 +30,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address findById(Long id) {
+    public Address getById(Long id) {
         Address address = addressRepo.findById(id).orElse(null);
 
         if (address == null) {
@@ -37,5 +39,19 @@ public class AddressServiceImpl implements AddressService {
         }
         log.info("IN findById - address found by id: {}", address);
         return address;
+    }
+
+    @Override
+    public void create(Address address) {
+        address.setCreatedDate(LocalDateTime.now());
+        address.setStatus(Status.ACTIVE);
+        Address createdAddress = addressRepo.save(address);
+        log.info("IN create - address: {} successfully registered", createdAddress);
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
     }
 }

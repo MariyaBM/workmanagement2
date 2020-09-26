@@ -1,10 +1,15 @@
 package com.smart.workmanagement.service.impl;
 
 import com.smart.workmanagement.model.Order;
+import com.smart.workmanagement.model.Status;
+import com.smart.workmanagement.model.User;
 import com.smart.workmanagement.repo.OrderRepo;
+import com.smart.workmanagement.repo.UserRepo;
 import com.smart.workmanagement.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +20,13 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
+    private final UserRepo userRepo;
 
 
     @Autowired
-    public OrderServiceImpl(OrderRepo orderRepo) {
+    public OrderServiceImpl(OrderRepo orderRepo, UserRepo userRepo) {
         this.orderRepo = orderRepo;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -42,12 +49,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order create(Order order) {
+    public void create(Order order) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userRepo.findByUsername(name);
+
         order.setCreatedDate(LocalDateTime.now());
+        order.setAuthor(user);
+        order.setStatus(Status.ACTIVE);
 
         Order createdOrder = orderRepo.save(order);
-        log.info("IN create - order: {} successfully registered", createdOrder);
-        return createdOrder;
+        log.info("IN create - order: {} successfully created", createdOrder);
+    }
+
+    @Override
+    public void update(Long id) {
+
     }
 
     @Override

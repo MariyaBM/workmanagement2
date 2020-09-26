@@ -6,10 +6,9 @@ import com.smart.workmanagement.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,5 +31,30 @@ public class CustomerController {
         }
 
         return new ResponseEntity<>(CustomerDto.customerDtoList(customers), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "{id}")
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable(name = "id") Long id) {
+        Customer customer = customerService.getById(id);
+
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        CustomerDto result = CustomerDto.fromCustomer(customer);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody @Valid Customer customer) {
+
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        customerService.create(customer);
+        return new ResponseEntity<>(CustomerDto.fromCustomer(customer), HttpStatus.OK);
+
     }
 }

@@ -6,9 +6,7 @@ import com.smart.workmanagement.model.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,10 +24,10 @@ public class OrderDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startDate;
-
     private WorkGroup workGroup;
-
+    private List<UserDto> executors;
     private CustomerDto customer;
+    private AddressDto address;
     private String workDescription;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -43,6 +41,9 @@ public class OrderDto {
         Order order = new Order();
         User user = new User();
         Customer customer = new Customer();
+        Address address = new Address();
+        List<User> users = new ArrayList<>();
+
         order.setId(id);
         order.setExtId(extId);
         order.setCreatedDate(createdDate);
@@ -51,7 +52,9 @@ public class OrderDto {
         order.setAuthor(UserDto.fromUser(user).toUser());
         order.setStartDate(startDate);
         order.setWorkGroup(workGroup);
+        order.setExecutors(users);
         order.setCustomer(CustomerDto.fromCustomer(customer).toCustomer());
+        order.setAddress(AddressDto.fromAddress(address).toAddress());
         order.setWorkDescription(workDescription);
         order.setEndDate(endDate);
         order.setVerificationDate(verificationDate);
@@ -70,7 +73,9 @@ public class OrderDto {
         orderDto.setAuthor(UserDto.fromUser(order.getAuthor()));
         orderDto.setStartDate(order.getStartDate());
         orderDto.setWorkGroup(order.getWorkGroup());
+        orderDto.setExecutors(UserDto.userDtoList(order.getExecutors()));
         orderDto.setCustomer(CustomerDto.fromCustomer(order.getCustomer()));
+        orderDto.setAddress(AddressDto.fromAddress(order.getAddress()));
         orderDto.setWorkDescription(order.getWorkDescription());
         orderDto.setEndDate(order.getEndDate());
         orderDto.setVerificationDate(order.getVerificationDate());

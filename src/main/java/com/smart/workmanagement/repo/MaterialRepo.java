@@ -1,4 +1,7 @@
 package com.smart.workmanagement.repo;
 
-public interface MaterialRepo {
+import com.smart.workmanagement.model.Material;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MaterialRepo extends JpaRepository<Material, Long> {
 }

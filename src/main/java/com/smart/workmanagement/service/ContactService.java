@@ -8,5 +8,9 @@ public interface ContactService {
 
     List<Contact> getAllContact();
 
-    Contact findById(Long id);
+    Contact getById(Long id);
+
+    void create(Contact contact);
+
+    void delete(Long id);
 }

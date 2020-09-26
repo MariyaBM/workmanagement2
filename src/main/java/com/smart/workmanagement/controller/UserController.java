@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<UserDto> getUser(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
 
         if (user == null) {
@@ -47,5 +47,6 @@ public class UserController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 
 }

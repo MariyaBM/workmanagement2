@@ -20,10 +20,12 @@ public class Customer extends BaseEntity{
     private List<Contact> contacts;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "customers_addreses",
+    @JoinTable(name = "customers_addresses",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
     private List<Address> addresses;
+
+
 
 
 }

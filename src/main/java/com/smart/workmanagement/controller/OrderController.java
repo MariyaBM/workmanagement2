@@ -7,11 +7,9 @@ import com.smart.workmanagement.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,7 +35,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<OrderDto> getOrderById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable(name = "id") Long id) {
         Order order = orderService.getById(id);
 
         if (order == null) {
@@ -47,5 +45,17 @@ public class OrderController {
         OrderDto result = OrderDto.fromOrder(order);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<OrderDto> saveOrder(@RequestBody @Valid Order order) {
+
+        if (order == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        orderService.create(order);
+        return new ResponseEntity<>(OrderDto.fromOrder(order), HttpStatus.OK);
+
     }
 }
